@@ -1,0 +1,9 @@
+# Local verification outputs
+verification-*.png
+verification-report.json
+
+# Earlier draft files kept only on the local machine
+landing-*.html
+landing-mobile-v2-*.png
+docs/superpowers/
+assets/ost-festa-hero.png

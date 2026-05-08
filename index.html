@@ -1,0 +1,1249 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>여유톡 | OST FESTA 티켓 신청 이벤트</title>
+  <meta name="description" content="여유톡 지브리 & 뮤지컬 OST FESTA 전국 공연 일정과 무료초대권 신청 안내">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap");
+
+    :root {
+      --night: oklch(18% 0.065 258);
+      --night-deep: oklch(13% 0.055 258);
+      --night-soft: oklch(24% 0.07 254);
+      --ink: oklch(22% 0.035 252);
+      --muted: oklch(49% 0.034 252);
+      --muted-2: oklch(63% 0.03 250);
+      --paper: oklch(98.6% 0.006 250);
+      --paper-blue: oklch(96.7% 0.014 245);
+      --line: oklch(89.5% 0.018 248);
+      --line-dark: oklch(38% 0.04 254);
+      --gold: oklch(83% 0.15 84);
+      --gold-deep: oklch(67% 0.13 78);
+      --coral: oklch(67% 0.16 36);
+      --blue: oklch(55% 0.13 245);
+      --white-tint: oklch(99% 0.004 250);
+      --radius: 8px;
+      --shadow-soft: 0 16px 38px oklch(18% 0.065 258 / 0.12);
+      --shadow-lift: 0 24px 64px oklch(18% 0.065 258 / 0.2);
+      --font: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      --font-hero: "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper-blue);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper-blue);
+      font-family: var(--font);
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+      background: var(--paper);
+      box-shadow: 0 0 0 1px oklch(100% 0 0 / 0.05);
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 5;
+      min-height: 70px;
+      display: grid;
+      grid-template-columns: 170px 1fr auto;
+      align-items: center;
+      gap: 28px;
+      padding: 0 clamp(22px, 4vw, 52px);
+      color: var(--white-tint);
+      background:
+        linear-gradient(180deg, oklch(13% 0.055 258 / 0.98), oklch(16% 0.06 258 / 0.94));
+      border-bottom: 1px solid oklch(100% 0 0 / 0.09);
+    }
+
+    .brand {
+      color: var(--white-tint);
+      font-size: 24px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      gap: clamp(22px, 3vw, 42px);
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .main-nav a {
+      color: oklch(91% 0.01 250 / 0.74);
+      transition: color 180ms ease;
+    }
+
+    .main-nav a:hover {
+      color: var(--white-tint);
+    }
+
+    .utility {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 18px;
+      white-space: nowrap;
+    }
+
+    .event-link {
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .account-button {
+      width: 34px;
+      height: 34px;
+      display: inline-grid;
+      place-items: center;
+      color: var(--white-tint);
+      border: 1px solid oklch(100% 0 0 / 0.26);
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 950;
+    }
+
+    .hero {
+      --hero-image: url("assets/hero-moon-ost.png");
+      position: relative;
+      min-height: 400px;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      color: var(--white-tint);
+      background:
+        linear-gradient(90deg, oklch(11% 0.05 258 / 0.96) 0%, oklch(13% 0.06 258 / 0.84) 37%, oklch(15% 0.055 258 / 0.25) 68%, oklch(12% 0.05 258 / 0.12) 100%),
+        linear-gradient(180deg, oklch(12% 0.055 258 / 0) 62%, oklch(12% 0.055 258 / 0.72) 100%),
+        var(--hero-image) center / cover no-repeat;
+      isolation: isolate;
+      transition: background-image 260ms ease;
+    }
+
+    .hero.is-art-slide {
+      background: var(--hero-image) center / cover no-repeat;
+    }
+
+    .hero.is-art-slide::before,
+    .hero.is-art-slide .hero-inner {
+      display: none;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(oklch(100% 0 0 / 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, oklch(100% 0 0 / 0.03) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(90deg, black, transparent 75%);
+    }
+
+    .hero-inner {
+      width: min(1120px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: clamp(28px, 4vw, 42px) 0 clamp(34px, 5vw, 48px);
+    }
+
+    .hero-label {
+      width: fit-content;
+      min-height: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 14px;
+      color: var(--gold);
+      background: oklch(100% 0 0 / 0.08);
+      border: 1px solid oklch(100% 0 0 / 0.14);
+      border-radius: 999px;
+      font-family: var(--font-hero);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .hero-kicker {
+      margin: 18px 0 6px;
+      color: var(--gold);
+      font-family: var(--font-hero);
+      font-size: clamp(22px, 2.2vw, 30px);
+      line-height: 1.12;
+      font-weight: 400;
+      text-shadow: 0 8px 30px oklch(10% 0.055 258 / 0.35);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 610px;
+      color: var(--gold);
+      font-family: var(--font-hero);
+      font-size: clamp(54px, 6.6vw, 82px);
+      line-height: 0.96;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-shadow: 0 12px 38px oklch(10% 0.055 258 / 0.46);
+    }
+
+    .hero-copy {
+      margin: 18px 0 0;
+      max-width: 520px;
+      color: oklch(95% 0.01 250 / 0.88);
+      font-family: var(--font-hero);
+      font-size: clamp(16px, 1.45vw, 18px);
+      line-height: 1.58;
+      font-weight: 400;
+      word-break: keep-all;
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .primary-cta,
+    .ghost-cta {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 950;
+      transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .primary-cta {
+      gap: 10px;
+      padding: 0 28px;
+      color: var(--night-deep);
+      background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+      border: 1px solid oklch(100% 0 0 / 0.28);
+      box-shadow: 0 16px 36px oklch(75% 0.13 82 / 0.28);
+    }
+
+    .ghost-cta {
+      padding: 0 22px;
+      color: var(--white-tint);
+      background: oklch(100% 0 0 / 0.08);
+      border: 1px solid oklch(100% 0 0 / 0.2);
+    }
+
+    .primary-cta:hover,
+    .ghost-cta:hover {
+      transform: translateY(-2px);
+    }
+
+    .slider-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      display: flex;
+      gap: 9px;
+      transform: translateX(-50%);
+    }
+
+    .slider-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: oklch(100% 0 0 / 0.36);
+      cursor: pointer;
+    }
+
+    .slider-dot.is-active {
+      width: 28px;
+      border-radius: 999px;
+      background: var(--gold);
+    }
+
+    .events-shell {
+      position: relative;
+      background:
+        linear-gradient(180deg, var(--paper) 0%, var(--paper-blue) 100%);
+    }
+
+    .section {
+      width: min(1120px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: clamp(29px, 3.5vw, 45px) 0 clamp(42px, 5vw, 64px);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(390px, 1fr) auto;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 26px;
+    }
+
+    .section-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(26px, 2.4vw, 34px);
+      line-height: 1.08;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .section-subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0 6px;
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-button {
+      flex: 0 0 auto;
+      height: 34px;
+      padding: 0 13px;
+      color: oklch(35% 0.04 252);
+      background: var(--white-tint);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 950;
+      box-shadow: 0 6px 18px oklch(40% 0.05 250 / 0.06);
+      transition: transform 160ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: oklch(80% 0.04 248);
+    }
+
+    .filter-button.is-active {
+      color: var(--white-tint);
+      background: var(--night-deep);
+      border-color: var(--night-deep);
+      box-shadow: 0 10px 24px oklch(18% 0.065 258 / 0.18);
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .event-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white-tint);
+      box-shadow: var(--shadow-soft);
+      transition: transform 190ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 190ms ease, border-color 190ms ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-6px);
+      border-color: oklch(78% 0.055 248);
+      box-shadow: var(--shadow-lift);
+    }
+
+    .event-card.is-hidden {
+      display: none;
+    }
+
+    .event-card a {
+      display: grid;
+      height: 100%;
+    }
+
+    .event-thumb {
+      position: relative;
+      aspect-ratio: 1.42 / 1;
+      overflow: hidden;
+      background: oklch(92% 0.02 248);
+    }
+
+    .event-thumb::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 48%;
+      background: linear-gradient(180deg, transparent, oklch(13% 0.055 258 / 0.42));
+      pointer-events: none;
+    }
+
+    .event-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.01);
+      filter: saturate(0.94) contrast(1.04);
+      transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), filter 260ms ease;
+    }
+
+    .event-card:hover .event-thumb img {
+      transform: scale(1.045);
+      filter: saturate(1.02) contrast(1.05);
+    }
+
+    .region-badge {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      z-index: 2;
+      min-height: 30px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 13px;
+      color: var(--night-deep);
+      background: oklch(98% 0.01 250 / 0.92);
+      border: 1px solid oklch(90% 0.018 248 / 0.95);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 950;
+      box-shadow: 0 8px 20px oklch(20% 0.04 250 / 0.16);
+    }
+
+    .event-body {
+      display: grid;
+      align-content: start;
+      min-height: 126px;
+      padding: 14px 16px 14px;
+    }
+
+    .event-date {
+      margin: 0;
+      color: var(--gold-deep);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .event-name {
+      min-height: 30px;
+      margin: 4px 0 10px;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 950;
+      word-break: keep-all;
+    }
+
+    .ticket-button {
+      align-self: end;
+      width: 100%;
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white-tint);
+      background: linear-gradient(180deg, var(--night), var(--night-deep));
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .wide-banner {
+      position: relative;
+      margin-top: clamp(30px, 4vw, 42px);
+      min-height: 162px;
+      display: grid;
+      grid-template-columns: minmax(220px, 0.85fr) 1.35fr auto;
+      align-items: center;
+      gap: 28px;
+      padding: clamp(24px, 3vw, 34px);
+      overflow: hidden;
+      color: var(--white-tint);
+      background:
+        linear-gradient(90deg, oklch(12% 0.055 258 / 0.98), oklch(18% 0.07 254 / 0.9)),
+        url("assets/hero-moon-ost.png") right center / cover no-repeat;
+      border: 1px solid oklch(100% 0 0 / 0.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lift);
+    }
+
+    .wide-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, oklch(12% 0.055 258 / 0.9), oklch(12% 0.055 258 / 0.32), oklch(12% 0.055 258 / 0.78));
+      pointer-events: none;
+    }
+
+    .concert-stage,
+    .wide-banner > div {
+      position: relative;
+      z-index: 1;
+    }
+
+    .concert-stage {
+      height: 108px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 20% 52%, var(--gold) 0 4px, transparent 5px),
+        radial-gradient(circle at 61% 44%, oklch(85% 0.13 84 / 0.78) 0 3px, transparent 4px),
+        linear-gradient(110deg, oklch(100% 0 0 / 0.14), oklch(100% 0 0 / 0.04));
+      border: 1px solid oklch(100% 0 0 / 0.16);
+    }
+
+    .concert-stage::before,
+    .concert-stage::after {
+      content: "";
+      position: absolute;
+      bottom: 14px;
+      width: 98px;
+      height: 98px;
+      border-radius: 50%;
+      background: oklch(100% 0 0 / 0.13);
+      filter: blur(18px);
+    }
+
+    .concert-stage::before {
+      left: 10px;
+    }
+
+    .concert-stage::after {
+      right: 20px;
+    }
+
+    .banner-kicker {
+      display: inline-flex;
+      min-height: 28px;
+      align-items: center;
+      padding: 0 12px;
+      color: var(--gold);
+      border: 1px solid oklch(82% 0.14 84 / 0.44);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .wide-banner h3 {
+      margin: 12px 0 7px;
+      color: var(--gold);
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.1;
+      font-weight: 950;
+    }
+
+    .wide-banner p {
+      margin: 0;
+      color: oklch(93% 0.012 250 / 0.78);
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 750;
+      word-break: keep-all;
+    }
+
+    .mini-schedule {
+      display: grid;
+      gap: 9px;
+      min-width: 190px;
+      color: oklch(93% 0.012 250 / 0.8);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .mini-schedule span {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .mini-schedule strong {
+      color: var(--white-tint);
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--line);
+      box-shadow: 0 10px 28px oklch(35% 0.04 250 / 0.06);
+    }
+
+    .service-item {
+      min-height: 104px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 22px;
+      background: var(--white-tint);
+    }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      color: var(--night);
+      border: 1px solid oklch(82% 0.035 248);
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 950;
+      background: var(--paper-blue);
+    }
+
+    .service-icon img {
+      width: 31px;
+      height: 31px;
+    }
+
+    .service-item strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .service-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.48;
+      font-weight: 750;
+      word-break: keep-all;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 160px 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding: 36px clamp(24px, 4vw, 52px);
+      color: oklch(91% 0.01 250 / 0.66);
+      background: var(--night-deep);
+      border-top: 1px solid oklch(100% 0 0 / 0.08);
+    }
+
+    .footer-brand {
+      color: var(--white-tint);
+      font-size: 25px;
+      font-weight: 950;
+    }
+
+    .company-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.55;
+      font-weight: 750;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .socials a {
+      width: 38px;
+      height: 38px;
+      display: inline-grid;
+      place-items: center;
+      color: var(--white-tint);
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 950;
+      background: transparent;
+      transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .socials a:hover {
+      transform: translateY(-2px);
+    }
+
+    .socials img {
+      width: 34px;
+      height: 34px;
+      display: block;
+    }
+
+    @media (max-width: 1180px) {
+      .section-head {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .filters {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .topbar {
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+        padding: 0 22px;
+      }
+
+      .main-nav {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        gap: 20px;
+        overflow-x: auto;
+        padding: 0 0 16px;
+      }
+
+      .hero {
+        min-height: 448px;
+        background-position: 58% center;
+      }
+
+      .section {
+        width: min(100% - 34px, 720px);
+      }
+
+      .filters {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 2px 0 4px;
+      }
+
+      .filter-button {
+        flex: 0 0 auto;
+      }
+
+      .event-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+      }
+
+      .wide-banner {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-schedule {
+        min-width: 0;
+      }
+
+      .service-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        background: var(--paper-blue);
+      }
+
+      .brand {
+        font-size: 21px;
+      }
+
+      .event-link {
+        display: none;
+      }
+
+      .account-button {
+        width: 32px;
+        height: 32px;
+      }
+
+      .main-nav {
+        font-size: 13px;
+      }
+
+      .hero {
+        min-height: 496px;
+        background:
+          linear-gradient(180deg, oklch(11% 0.055 258 / 0.6) 0%, oklch(12% 0.055 258 / 0.2) 28%, oklch(12% 0.055 258 / 0.92) 76%, oklch(12% 0.055 258 / 0.98) 100%),
+          var(--hero-image) 66% center / cover no-repeat;
+      }
+
+      .hero.is-art-slide {
+        min-height: 360px;
+        background: var(--hero-image) center / cover no-repeat;
+      }
+
+      .hero-inner {
+        width: min(100% - 32px, 420px);
+        padding: 48px 0 70px;
+      }
+
+      .hero-label {
+        min-height: 32px;
+        font-size: 12px;
+      }
+
+      .hero-kicker {
+        margin-top: 22px;
+      }
+
+      h1 {
+        max-width: 340px;
+        font-size: clamp(48px, 14vw, 58px);
+      }
+
+      .hero-copy {
+        max-width: 340px;
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+        max-width: 292px;
+      }
+
+      .section {
+        width: min(100% - 28px, 430px);
+        padding: 27px 0 38px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .event-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .event-body {
+        min-height: 124px;
+      }
+
+      .event-name {
+        min-height: auto;
+      }
+
+      .wide-banner {
+        padding: 22px;
+      }
+
+      .wide-banner h3 {
+        font-size: 24px;
+      }
+
+      .concert-stage {
+        height: 92px;
+      }
+
+      .service-item {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar" aria-label="여유톡 상단 메뉴">
+      <a class="brand" href="#top">여유톡</a>
+      <nav class="main-nav" aria-label="주요 메뉴">
+        <a href="#top">홈</a>
+        <a href="#events">공연·전시</a>
+        <a href="#events">여행·체험</a>
+        <a href="#events">이벤트</a>
+        <a href="#notice">공지사항</a>
+      </nav>
+      <div class="utility">
+        <a class="event-link" href="#events">#티켓신청이벤트</a>
+        <a class="account-button" href="#events" aria-label="마이페이지">MY</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="지브리와 뮤지컬 OST FESTA">
+        <div class="hero-inner">
+          <span class="hero-label">무료초대권 신청 이벤트</span>
+          <p class="hero-kicker">지브리 & 뮤지컬</p>
+          <h1>OST FESTA</h1>
+          <p class="hero-copy">지브리와 뮤지컬의 감동적인 OST를 라이브 콘서트로 만나는 전국 무료초대권 이벤트입니다.</p>
+          <div class="hero-actions">
+            <a class="primary-cta" href="#events">티켓 신청하기 <span aria-hidden="true">→</span></a>
+            <a class="ghost-cta" href="#events">공연 일정 보기</a>
+          </div>
+        </div>
+        <div class="slider-dots" aria-label="메인 배너 슬라이드">
+          <button class="slider-dot is-active" type="button" data-hero-slide="0" aria-label="첫 번째 배너" aria-pressed="true"></button>
+          <button class="slider-dot" type="button" data-hero-slide="1" aria-label="두 번째 배너" aria-pressed="false"></button>
+          <button class="slider-dot" type="button" data-hero-slide="2" aria-label="세 번째 배너" aria-pressed="false"></button>
+        </div>
+      </section>
+
+      <section class="events-shell">
+        <div class="section" id="events">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">지브리 & 뮤지컬 OST FESTA</h2>
+              <p class="section-subtitle">전국 투어 일정</p>
+            </div>
+            <!-- 업체 연동 메모: 지역 필터 버튼의 data-filter 값과 행사 카드의 data-region 값을 맞추면 필터가 작동합니다. -->
+            <div class="filters" aria-label="지역 필터">
+              <button class="filter-button is-active" type="button" data-filter="all">전체</button>
+              <button class="filter-button" type="button" data-filter="서울">서울</button>
+              <button class="filter-button" type="button" data-filter="경기">경기</button>
+              <button class="filter-button" type="button" data-filter="인천">인천</button>
+              <button class="filter-button" type="button" data-filter="대전">대전</button>
+              <button class="filter-button" type="button" data-filter="부산">부산</button>
+              <button class="filter-button" type="button" data-filter="울산">울산</button>
+              <button class="filter-button" type="button" data-filter="세종">세종</button>
+              <button class="filter-button" type="button" data-filter="전북">전북</button>
+              <button class="filter-button" type="button" data-filter="충북">충북</button>
+            </div>
+          </div>
+
+          <!-- 업체 연동 메모: 아래 article.event-card 목록을 관리자 DB 행사 목록 반복문으로 교체하면 됩니다. -->
+          <div class="event-grid">
+            <article class="event-card" data-region="세종">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=42">
+                <div class="event-thumb">
+                  <img src="assets/events/event-42.jpg" alt="6월 16일 세종 비오케이아트센터 공연 포스터" loading="lazy">
+                  <span class="region-badge">세종</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">6/16 (화)</p>
+                  <h3 class="event-name">세종 비오케이아트센터</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="경기">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=41">
+                <div class="event-thumb">
+                  <img src="assets/events/event-41.jpg" alt="6월 12일 수원 진아트센터 공연 포스터" loading="lazy">
+                  <span class="region-badge">경기</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">6/12 (금)</p>
+                  <h3 class="event-name">수원 진아트센터</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="서울">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=40">
+                <div class="event-thumb">
+                  <img src="assets/events/event-40.jpg" alt="6월 11일 마포구 서교스퀘어 공연 포스터" loading="lazy">
+                  <span class="region-badge">서울</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">6/11 (목)</p>
+                  <h3 class="event-name">마포구 서교스퀘어</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="경기">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=39">
+                <div class="event-thumb">
+                  <img src="assets/events/event-39.jpg" alt="6월 9일 성남 바른아트센터 공연 포스터" loading="lazy">
+                  <span class="region-badge">경기</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">6/9 (화)</p>
+                  <h3 class="event-name">성남 바른아트센터</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="부산">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=37">
+                <div class="event-thumb">
+                  <img src="assets/events/event-37.png" alt="5월 30일 부산디자인진흥원 공연 포스터" loading="lazy">
+                  <span class="region-badge">부산</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/30 (토)</p>
+                  <h3 class="event-name">부산디자인진흥원</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="울산">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=36">
+                <div class="event-thumb">
+                  <img src="assets/events/event-36.jpg" alt="5월 29일 울산 J아트홀 공연 포스터" loading="lazy">
+                  <span class="region-badge">울산</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/29 (금)</p>
+                  <h3 class="event-name">울산 J아트홀</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="충북">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=35">
+                <div class="event-thumb">
+                  <img src="assets/events/event-35.jpg" alt="5월 27일 청주 충북대학교 공연 포스터" loading="lazy">
+                  <span class="region-badge">충북</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/27 (수)</p>
+                  <h3 class="event-name">청주 충북대학교</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="대전">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=34">
+                <div class="event-thumb">
+                  <img src="assets/events/event-34.jpg" alt="5월 23일 대전서구문화원 공연 포스터" loading="lazy">
+                  <span class="region-badge">대전</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/23 (토)</p>
+                  <h3 class="event-name">대전서구문화원</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="전북">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=31">
+                <div class="event-thumb">
+                  <img src="assets/events/event-31.jpg" alt="5월 16일 전주비전대학교 공연 포스터" loading="lazy">
+                  <span class="region-badge">전북</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/16 (토)</p>
+                  <h3 class="event-name">전주비전대학교</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="서울">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=30">
+                <div class="event-thumb">
+                  <img src="assets/events/event-30.jpg" alt="5월 20일 강동구 호원아트홀 공연 포스터" loading="lazy">
+                  <span class="region-badge">서울</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/20 (수)</p>
+                  <h3 class="event-name">강동구 호원아트홀</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="경기">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=29">
+                <div class="event-thumb">
+                  <img src="assets/events/event-29.jpg" alt="5월 15일 안산 에리카컨벤션 공연 포스터" loading="lazy">
+                  <span class="region-badge">경기</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/15 (금)</p>
+                  <h3 class="event-name">안산 에리카컨벤션</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="경기">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=26">
+                <div class="event-thumb">
+                  <img src="assets/events/event-26.jpg" alt="5월 19일 김포 효원연수문화센터 공연 포스터" loading="lazy">
+                  <span class="region-badge">경기</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/19 (화)</p>
+                  <h3 class="event-name">김포 효원연수문화센터</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="경기">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=24">
+                <div class="event-thumb">
+                  <img src="assets/events/event-24.jpg" alt="5월 9일 부천 솔안아트홀 공연 포스터" loading="lazy">
+                  <span class="region-badge">경기</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/9 (토)</p>
+                  <h3 class="event-name">부천 솔안아트홀</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+
+            <article class="event-card" data-region="인천">
+              <a href="https://yeoyoutalk.kr/event.asp?idx=23">
+                <div class="event-thumb">
+                  <img src="assets/events/event-23.jpg" alt="5월 28일 인천 그랜드오스티엄 공연 포스터" loading="lazy">
+                  <span class="region-badge">인천</span>
+                </div>
+                <div class="event-body">
+                  <p class="event-date">5/28 (목)</p>
+                  <h3 class="event-name">인천 그랜드오스티엄</h3>
+                  <span class="ticket-button">티켓 신청하기</span>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <section class="wide-banner" id="notice" aria-label="여유톡 힐링 콘서트 안내">
+            <div class="concert-stage" aria-hidden="true"></div>
+            <div>
+              <h3>김창옥의 힐링 콘서트</h3>
+              <p>따뜻한 음악과 이야기가 함께하는 여유톡의 대표 힐링 프로그램도 계속 만나보세요.</p>
+            </div>
+            <div class="mini-schedule" aria-label="추천 일정">
+              <span><strong>5/27</strong> 청주 충북대학교</span>
+              <span><strong>5/28</strong> 인천 그랜드오스티엄</span>
+              <span><strong>6/3</strong> 수원 경기아트센터</span>
+            </div>
+          </section>
+
+          <div class="service-row">
+            <div class="service-item">
+              <span class="service-icon" aria-hidden="true"><img src="assets/icons/service-ticket.svg" alt=""></span>
+              <div>
+                <strong>쉽고 간편한 티켓 신청</strong>
+                <span>공연별 신청 페이지에서 바로 접수할 수 있습니다.</span>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="service-icon" aria-hidden="true"><img src="assets/icons/service-gift.svg" alt=""></span>
+              <div>
+                <strong>다양한 이벤트</strong>
+                <span>전국 공연과 체험 혜택을 한곳에서 확인합니다.</span>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="service-icon" aria-hidden="true"><img src="assets/icons/service-headset.svg" alt=""></span>
+              <div>
+                <strong>친절한 고객센터</strong>
+                <span>궁금한 사항은 1877-6201로 문의하세요.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a class="footer-brand" href="#top">여유톡</a>
+      <p class="company-info">
+        <span>(주)반도생활건강</span>
+        <span>대표 박인우</span>
+        <span>사업자등록번호 607-81-98610</span>
+        <span>고객센터 1877-6201</span>
+        <span>부산광역시 금정구 중앙대로 2014</span>
+        <span>Copyright 2026 YEOYOUTALK. All rights reserved.</span>
+      </p>
+      <div class="socials" aria-label="소셜 링크">
+        <a href="https://www.instagram.com/" aria-label="인스타그램"><img src="assets/icons/social-instagram.svg" alt=""></a>
+        <a href="https://www.naver.com/" aria-label="네이버"><img src="assets/icons/social-naver.svg" alt=""></a>
+        <a href="https://www.youtube.com/" aria-label="유튜브"><img src="assets/icons/social-youtube.svg" alt=""></a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const hero = document.querySelector(".hero");
+    const heroDots = document.querySelectorAll("[data-hero-slide]");
+    const heroSlides = [
+      { image: 'url("assets/hero-moon-ost.png")', artOnly: false },
+      { image: 'url("assets/hp1.jpg")', artOnly: true },
+      { image: 'url("assets/hp2.jpg")', artOnly: true }
+    ];
+
+    function setHeroSlide(index) {
+      const slide = heroSlides[index];
+
+      hero.style.setProperty("--hero-image", slide.image);
+      hero.classList.toggle("is-art-slide", slide.artOnly);
+
+      heroDots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === index;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-pressed", String(isActive));
+      });
+    }
+
+    heroDots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        setHeroSlide(Number(dot.dataset.heroSlide));
+      });
+    });
+
+    const filterButtons = document.querySelectorAll("[data-filter]");
+    const eventCards = document.querySelectorAll("[data-region]");
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+
+        filterButtons.forEach((item) => item.classList.remove("is-active"));
+        button.classList.add("is-active");
+
+        eventCards.forEach((card) => {
+          const shouldShow = filter === "all" || card.dataset.region === filter;
+          card.classList.toggle("is-hidden", !shouldShow);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
