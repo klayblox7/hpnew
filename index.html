@@ -230,6 +230,10 @@
       word-break: keep-all;
     }
 
+    .copy-mobile {
+      display: none;
+    }
+
     .hero-actions {
       margin-top: 24px;
       display: flex;
@@ -802,85 +806,182 @@
 
       .main-nav {
         font-size: 13px;
+        scrollbar-width: none;
       }
 
       .hero {
-        min-height: 496px;
+        min-height: 430px;
         background:
-          linear-gradient(180deg, oklch(11% 0.055 258 / 0.6) 0%, oklch(12% 0.055 258 / 0.2) 28%, oklch(12% 0.055 258 / 0.92) 76%, oklch(12% 0.055 258 / 0.98) 100%),
-          var(--hero-image) 66% center / cover no-repeat;
+          linear-gradient(180deg, oklch(11% 0.055 258 / 0.68) 0%, oklch(12% 0.055 258 / 0.36) 34%, oklch(12% 0.055 258 / 0.95) 82%, oklch(12% 0.055 258 / 0.98) 100%),
+          var(--hero-image) 69% center / cover no-repeat;
       }
 
       .hero.is-art-slide {
-        min-height: 360px;
+        min-height: 270px;
         background: var(--hero-image) center / cover no-repeat;
       }
 
       .hero-inner {
-        width: min(100% - 32px, 420px);
-        padding: 48px 0 70px;
+        width: min(100% - 28px, 420px);
+        padding: 38px 0 56px;
       }
 
       .hero-label {
-        min-height: 32px;
+        min-height: 30px;
+        padding: 0 15px;
         font-size: 12px;
+        white-space: nowrap;
       }
 
       .hero-kicker {
-        margin-top: 22px;
+        margin-top: 20px;
+        font-size: clamp(23px, 7vw, 28px);
+        white-space: nowrap;
       }
 
       h1 {
-        max-width: 340px;
-        font-size: clamp(48px, 14vw, 58px);
+        max-width: 100%;
+        font-size: clamp(44px, 13vw, 54px);
+        white-space: nowrap;
       }
 
       .hero-copy {
-        max-width: 340px;
-        font-size: 16px;
+        max-width: 100%;
+        margin-top: 15px;
+        font-size: 15px;
+        line-height: 1.35;
+        white-space: nowrap;
+      }
+
+      .copy-desktop {
+        display: none;
+      }
+
+      .copy-mobile {
+        display: inline;
       }
 
       .hero-actions {
-        align-items: stretch;
-        flex-direction: column;
-        max-width: 292px;
+        width: 100%;
+        max-width: 324px;
+        margin-top: 20px;
+        align-items: center;
+        gap: 9px;
+      }
+
+      .primary-cta,
+      .ghost-cta {
+        flex: 1 1 0;
+        min-height: 44px;
+        padding: 0 14px;
+        font-size: 13px;
+        white-space: nowrap;
       }
 
       .section {
         width: min(100% - 28px, 430px);
-        padding: 27px 0 38px;
+        padding: 24px 0 36px;
       }
 
       .section-title {
-        font-size: 28px;
+        font-size: clamp(22px, 6vw, 25px);
+        line-height: 1.05;
+        white-space: nowrap;
+      }
+
+      .filters {
+        margin-right: -14px;
+        padding-right: 14px;
+      }
+
+      .filter-button {
+        white-space: nowrap;
       }
 
       .event-grid {
         grid-template-columns: 1fr;
+        gap: 18px;
       }
 
       .event-body {
-        min-height: 124px;
+        min-height: 0;
+        padding: 13px 14px 15px;
       }
 
       .event-name {
         min-height: auto;
+        font-size: 16px;
+        line-height: 1.25;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .event-date {
+        white-space: nowrap;
+      }
+
+      .ticket-button {
+        min-height: 42px;
+        margin-top: 16px;
+        white-space: nowrap;
       }
 
       .wide-banner {
-        padding: 22px;
+        min-height: 0;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+        padding: 20px;
+      }
+
+      .wide-banner > div {
+        min-width: 0;
       }
 
       .wide-banner h3 {
-        font-size: 24px;
+        margin: 0 0 6px;
+        font-size: 21px;
+        white-space: nowrap;
+      }
+
+      .wide-banner p {
+        max-width: 100%;
+        font-size: 13px;
+        line-height: 1.45;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .mini-schedule {
+        min-width: 0;
+        gap: 6px;
+        font-size: 12px;
+      }
+
+      .mini-schedule span {
+        display: block;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .concert-stage {
-        height: 92px;
+        display: none;
       }
 
       .service-item {
-        padding: 18px;
+        min-height: 84px;
+        gap: 13px;
+        padding: 15px 16px;
+      }
+
+      .service-item strong,
+      .service-item span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   </style>
@@ -908,7 +1009,7 @@
           <span class="hero-label">무료초대권 신청 이벤트</span>
           <p class="hero-kicker">지브리 & 뮤지컬</p>
           <h1>OST FESTA</h1>
-          <p class="hero-copy">지브리와 뮤지컬의 감동적인 OST를 라이브 콘서트로 만나는 전국 무료초대권 이벤트입니다.</p>
+          <p class="hero-copy"><span class="copy-desktop">지브리와 뮤지컬의 감동적인 OST를 라이브 콘서트로 만나는 전국 무료초대권 이벤트입니다.</span><span class="copy-mobile">전국 무료초대권 OST 콘서트 이벤트</span></p>
           <div class="hero-actions">
             <a class="primary-cta" href="#events">티켓 신청하기 <span aria-hidden="true">→</span></a>
             <a class="ghost-cta" href="#events">공연 일정 보기</a>
@@ -1146,7 +1247,7 @@
             <div class="concert-stage" aria-hidden="true"></div>
             <div>
               <h3>김창옥의 힐링 콘서트</h3>
-              <p>따뜻한 음악과 이야기가 함께하는 여유톡의 대표 힐링 프로그램도 계속 만나보세요.</p>
+              <p><span class="copy-desktop">따뜻한 음악과 이야기가 함께하는 여유톡의 대표 힐링 프로그램도 계속 만나보세요.</span><span class="copy-mobile">힐링 프로그램도 계속 만나보세요.</span></p>
             </div>
             <div class="mini-schedule" aria-label="추천 일정">
               <span><strong>5/27</strong> 청주 충북대학교</span>
