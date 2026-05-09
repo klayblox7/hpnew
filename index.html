@@ -146,6 +146,8 @@
       align-items: center;
       overflow: hidden;
       color: var(--white-tint);
+      cursor: grab;
+      touch-action: pan-y;
       background:
         linear-gradient(90deg, oklch(11% 0.05 258 / 0.96) 0%, oklch(13% 0.06 258 / 0.84) 37%, oklch(15% 0.055 258 / 0.25) 68%, oklch(12% 0.05 258 / 0.12) 100%),
         linear-gradient(180deg, oklch(12% 0.055 258 / 0) 62%, oklch(12% 0.055 258 / 0.72) 100%),
@@ -792,11 +794,28 @@
       }
 
       .brand {
+        grid-column: 1 / -1;
+        grid-row: 1;
         font-size: 21px;
       }
 
       .event-link {
         display: none;
+      }
+
+      .topbar {
+        min-height: 0;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto auto;
+        gap: 18px 10px;
+        padding: 16px 16px 18px;
+      }
+
+      .utility {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: center;
+        justify-self: end;
       }
 
       .account-button {
@@ -805,8 +824,17 @@
       }
 
       .main-nav {
+        grid-column: 1;
+        grid-row: 2;
+        min-width: 0;
+        gap: 18px;
+        padding: 0;
         font-size: 13px;
         scrollbar-width: none;
+      }
+
+      .main-nav a {
+        flex: 0 0 auto;
       }
 
       .hero {
@@ -1309,15 +1337,20 @@
       { image: 'url("assets/hp1.jpg")', artOnly: true },
       { image: 'url("assets/hp2.jpg")', artOnly: true }
     ];
+    let activeHeroIndex = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let suppressHeroClick = false;
 
     function setHeroSlide(index) {
-      const slide = heroSlides[index];
+      activeHeroIndex = (index + heroSlides.length) % heroSlides.length;
+      const slide = heroSlides[activeHeroIndex];
 
       hero.style.setProperty("--hero-image", slide.image);
       hero.classList.toggle("is-art-slide", slide.artOnly);
 
       heroDots.forEach((dot, dotIndex) => {
-        const isActive = dotIndex === index;
+        const isActive = dotIndex === activeHeroIndex;
         dot.classList.toggle("is-active", isActive);
         dot.setAttribute("aria-pressed", String(isActive));
       });
@@ -1328,6 +1361,33 @@
         setHeroSlide(Number(dot.dataset.heroSlide));
       });
     });
+
+    hero.addEventListener("touchstart", (event) => {
+      const touch = event.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }, { passive: true });
+
+    hero.addEventListener("touchend", (event) => {
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+      const isHorizontalSwipe = Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2;
+
+      if (!isHorizontalSwipe) return;
+
+      suppressHeroClick = true;
+      setHeroSlide(activeHeroIndex + (deltaX < 0 ? 1 : -1));
+      window.setTimeout(() => {
+        suppressHeroClick = false;
+      }, 120);
+    }, { passive: true });
+
+    hero.addEventListener("click", (event) => {
+      if (!suppressHeroClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
 
     const filterButtons = document.querySelectorAll("[data-filter]");
     const eventCards = document.querySelectorAll("[data-region]");
